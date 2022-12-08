@@ -1,0 +1,18 @@
+{
+	"format_version": 2,
+	"header": {
+		"description": "Show player facing direction",
+		"name": "Cardinal_Direction",
+		"uuid": "667c6021-e1ff-4304-8355-ea6595c3a856",
+		"version": [ 0,0,3 ],
+		"min_engine_version": [ 1, 18, 0 ]
+	},
+	"modules": [
+		{
+			"description": "",
+			"type": "resources",
+			"uuid": "2cb1d536-32ac-4b1f-b4ce-9baac1b398dc",
+			"version": [0, 0, 1]
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.cardinal": {
+      "arrays": {
+        "textures": {
+          "Array.text": [
+		"Texture.cardinal_1",
+		"Texture.cardinal_2",
+		"Texture.cardinal_3",
+		"Texture.cardinal_4"
+          ]
+        }
+      },
+      "geometry": "geometry.cardinal",
+      "materials": [ { "*": "Material.cardinal" } ],
+      "ignore_lighting":true,
+      "light_color_multiplier":1.5,
+      "textures": [ "Array.text[ variable.cardinal ]" ],
+      "part_visibility": [ { "*": true }, { "head": false } ]
+
+    }
+  }
+}

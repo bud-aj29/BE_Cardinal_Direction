@@ -1,0 +1,21 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.cardinal": {
+			"loop": true,
+			"bones": {
+				"cardinal_Screen1": {
+					"position": [ "variable.cardinal_position", 0, 0 ]
+				}
+			}
+		},
+		"animation.cardinal_water": {
+			"loop": true,
+			"bones": {
+				"cardinal_Screen1": {
+					"position": [ 0, -13.5, 0 ]
+				}
+			}
+		}
+	}
+}

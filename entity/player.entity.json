@@ -1,0 +1,97 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:player",
+      "materials": {
+	"cardinal": "entity_alphablend"
+      },
+      "textures": {
+	"cardinal_1": "textures/addon/cardinal/cardinal_1",
+	"cardinal_2": "textures/addon/cardinal/cardinal_2",
+	"cardinal_3": "textures/addon/cardinal/cardinal_3",
+	"cardinal_4": "textures/addon/cardinal/cardinal_4"
+      },
+      "geometry": {
+	"cardinal": "geometry.cardinal"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.helmet_layer_visible = 1.0;", //vanilla
+          "variable.leg_layer_visible = 1.0;", //vanilla
+          "variable.boot_layer_visible = 1.0;", //vanilla
+          "variable.chest_layer_visible = 1.0;", //vanilla
+          "variable.attack_body_rot_y = Math.sin(360*Math.sqrt(variable.attack_time)) * 5.0;", //vanilla
+          "variable.tcos0 = (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;", //vanilla
+          "variable.first_person_rotation_factor = math.sin((1 - variable.attack_time) * 180.0);", //vanilla
+          "variable.hand_bob = query.life_time < 0.01 ? 0.0 : variable.hand_bob + ((query.is_on_ground && query.is_alive ? math.clamp(math.sqrt(math.pow(query.position_delta(0), 2.0) + math.pow(query.position_delta(2), 2.0)), 0.0, 0.1) : 0.0) - variable.hand_bob) * 0.02;", //vanilla
+          "variable.map_angle = math.clamp(1 - variable.player_x_rotation / 45.1, 0.0, 1.0);", //vanilla
+          "variable.item_use_normalized = query.main_hand_item_use_duration / query.main_hand_item_max_duration;" ,  //vanilla
+
+	  "variable.cardinal_show = query.is_in_ui && !query.is_gliding;",
+	  "variable.cardinal = query.cardinal_facing_2d;",
+	  "v.c_p = 7.4;",
+	  "variable.cardinal_position_x = ((query.position(0) < -100000)*v.c_p)+((query.position(0) < -10000)*v.c_p)+((query.position(0) < -1000)*v.c_p)+((query.position(0) < -100)*v.c_p)+((query.position(0) < -10)*v.c_p)+((query.position(0) < 0)*v.c_p)+((query.position(0) > 10)*v.c_p)+((query.position(0) > 100)*v.c_p)+((query.position(0) > 1000)*v.c_p)+((query.position(0) > 10000)*v.c_p)+((query.position(0) > 100000)*v.c_p);",
+	  "variable.cardinal_position_y = ((query.position(1) < -100)*v.c_p)+((query.position(1) < -10)*v.c_p)+((query.position(1) < 0)*v.c_p)+((query.position(1) > 10)*v.c_p)+((query.position(1) > 100)*v.c_p);",
+	  "variable.cardinal_position_z = ((query.position(2) < -100000)*v.c_p)+((query.position(2) < -10000)*v.c_p)+((query.position(2) < -1000)*v.c_p)+((query.position(2) < -100)*v.c_p)+((query.position(2) < -10)*v.c_p)+((query.position(2) < 0)*v.c_p)+((query.position(2) > 10)*v.c_p)+((query.position(2) > 100)*v.c_p)+((query.position(2) > 1000)*v.c_p)+((query.position(2) > 10000)*v.c_p)+((query.position(2) > 100000)*v.c_p);",
+	  "variable.cardinal_position = variable.cardinal_position_x + variable.cardinal_position_y + variable.cardinal_position_z;",
+	  
+	  "v.chunk_align_x = ((query.position(0)-(math.floor(query.position(0)/16)*16))*-16)+128;",
+	  "v.chunk_align_y = math.lerp(0, 1, (1.6 - math.mod(query.position(1), 16) - (query.position(1) <= 0 ? 16)) * 16 + (query.vertical_speed * 0.5) + 0.25);",
+	  "v.chunk_align_z = ((query.position(2)-((math.floor(query.position(2)/16)+1)*16))*16)+128;",
+	  "v.chunk_align_pivot = -query.body_y_rotation;",
+	  "v.chunk_align_pivot_fp = variable.is_first_person ? -query.target_x_rotation:-query.body_y_rotation;",
+	  "v.chunk_show = !variable.map_face_icon && !variable.is_first_person && !query.is_in_ui && !variable.is_paperdoll && (query.get_equipped_item_name(1) == 'firework_rocket' || query.get_equipped_item_name(1) == 'nautilus_shell');",
+	  "v.slime_show = !variable.map_face_icon && !variable.is_first_person && !query.is_in_ui && !variable.is_paperdoll && query.get_equipped_item_name(1) == 'nautilus_shell';"
+        ],
+        "animate": [
+          "root" , //vanilla
+
+	  {"animation.cardinal": "variable.cardinal_show"},
+	  {"animation.cardinal_water": "variable.cardinal_show && query.is_swimming"},
+
+	  {"chunk": "v.chunk_show"},
+	  {"slime": "v.slime_show"}
+        ]
+      },
+      "animations": {
+	"animation.cardinal": "animation.cardinal",
+	"animation.cardinal_water": "animation.cardinal_water"
+      },
+      "render_controllers": [
+        { "controller.render.player.first_person": "variable.is_first_person" }, //vanilla
+        { "controller.render.player.third_person": "!variable.is_first_person && !variable.map_face_icon" }, //vanilla
+        { "controller.render.player.map": "variable.map_face_icon" } ,  //vanilla
+	
+	{ "controller.render.cardinal": "variable.cardinal_show" },
+	
+        { "controller.render.chunk": "v.chunk_show" },
+        { "controller.render.slime1": "v.slime_show" },
+        { "controller.render.slime2": "v.slime_show" },
+        { "controller.render.slime3": "v.slime_show" },
+        { "controller.render.slime4": "v.slime_show" },
+        { "controller.render.slime5": "v.slime_show" },
+        { "controller.render.slime6": "v.slime_show" },
+        { "controller.render.slime7": "v.slime_show" },
+        { "controller.render.slime8": "v.slime_show" },
+        { "controller.render.slime9": "v.slime_show" },
+        { "controller.render.slime10": "v.slime_show" },
+        { "controller.render.slime11": "v.slime_show" },
+        { "controller.render.slime12": "v.slime_show" },
+        { "controller.render.slime13": "v.slime_show" },
+        { "controller.render.slime14": "v.slime_show" },
+        { "controller.render.slime15": "v.slime_show" },
+        { "controller.render.slime16": "v.slime_show" },
+        { "controller.render.slime17": "v.slime_show" },
+        { "controller.render.slime18": "v.slime_show" },
+        { "controller.render.slime19": "v.slime_show" },
+        { "controller.render.slime20": "v.slime_show" },
+        { "controller.render.slime21": "v.slime_show" },
+        { "controller.render.slime22": "v.slime_show" },
+        { "controller.render.slime23": "v.slime_show" },
+        { "controller.render.slime24": "v.slime_show" },
+        { "controller.render.slime25": "v.slime_show" }
+      ]
+    }
+  }
+}
