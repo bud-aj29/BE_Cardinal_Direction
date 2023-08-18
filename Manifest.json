@@ -3,15 +3,15 @@
 	"header": {
 		"description": "Show player facing direction",
 		"name": "Cardinal_Direction",
-		"uuid": "667c6021-e1ff-4304-8355-ea6595c3a856",
-		"version": [ 0,0,3 ],
-		"min_engine_version": [ 1, 18, 0 ]
+		"uuid": "775a223d-acd1-4477-9eab-4ef266bf1991",
+		"version": [ 0,0,4 ],
+		"min_engine_version": [ 1, 20, 10 ]
 	},
 	"modules": [
 		{
 			"description": "",
 			"type": "resources",
-			"uuid": "2cb1d536-32ac-4b1f-b4ce-9baac1b398dc",
+			"uuid": "7c9550fe-ce3f-40cc-bd7f-8401bde399d7",
 			"version": [0, 0, 1]
 		}
 	]
